@@ -8,6 +8,12 @@ export const StyledPatientRegistrationFormHeader = styled(Box)(({ theme }) => ({
   alignItems: 'center'
 }))
 
+export const StyledSubmitWrapper = styled(Box)`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+`
+
 export const StyledPatientRegistrationFormContainer = styled(Box)(({ theme }) => ({
   minHeight: '100dvh',
   backgroundColor: theme.custom.grey1

@@ -1,12 +1,12 @@
 import { styled } from '@mui/material/styles'
 import { Box, Paper } from '@mui/material'
 
-export const StyledResultSectionContainer = styled(Paper)(({ theme }) => ({
+export const StyledResultContainer = styled(Paper)(({ theme }) => ({
   padding: 18,
   backgroundColor: theme.custom.grey2
 }))
 
-export const StyledResultSectionJSONContainer = styled(Box)<{
+export const StyledJSONContainer = styled(Box)<{
   component?: React.ElementType
 }>(({ theme }) => ({
   backgroundColor: '#fff',

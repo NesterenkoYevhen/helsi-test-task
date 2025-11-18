@@ -47,6 +47,7 @@ export const RFFDatePicker: FC<IRFFDatePickerProps> = ({
               maxDate={maxDate ? dayjs(maxDate) : defaultMax}
               onChange={(newValue: Dayjs | null) => {
                 input.onChange(newValue ? newValue.format('YYYY-MM-DD') : '')
+                input.onBlur()
               }}
               slotProps={{
                 textField: {

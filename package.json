@@ -16,7 +16,6 @@
     "@mui/material": "^6.5.0",
     "@mui/styled-engine-sc": "^6.5.0",
     "@mui/x-date-pickers": "^8.18.0",
-    "date-fns": "^3.6.0",
     "dayjs": "^1.11.19",
     "final-form": "^4.20.10",
     "react": "^19.2.0",

@@ -12,10 +12,13 @@ import { PatientDataSection } from './buisness/PatientDataSection'
 import { DocumentSection } from './buisness/DocumentSection'
 import { ResultSection } from './buisness/ResultSection'
 import { StyledPatientRegistrationFormContainer, StyledPatientRegistrationFormHeader } from './styles'
+import { ValidationErrorsModal } from './buisness/ValidationErrorsModal'
 
 const PatientRegistrationForm = () => {
   const [submittedData, setSubmittedData] =
     useState<PatientRegistrationFormValues | null>(null)
+  const [validationErrors, setValidationErrors] = useState<Record<string, string>>({})
+  const [isErrorModalOpen, setIsErrorModalOpen] = useState(false)
 
   const onSubmit = (values: PatientRegistrationFormValues) => {
     setSubmittedData(values)
@@ -24,10 +27,19 @@ const PatientRegistrationForm = () => {
     }, 100)
   }
 
+  const handleSubmitWithValidation = (errors: Record<string, string> | undefined) => {
+    if (errors && Object.keys(errors).length > 0) {
+      setValidationErrors(errors)
+      setIsErrorModalOpen(true)
+      setSubmittedData(null)
+      return errors
+    }
+    return undefined
+  }
+
   return (
     <StyledPatientRegistrationFormContainer>
-      <StyledPatientRegistrationFormHeader
-      >
+      <StyledPatientRegistrationFormHeader>
         <IconButton sx={{ color: 'white', mr: 2 }}>
           <ArrowBack />
         </IconButton>
@@ -37,8 +49,20 @@ const PatientRegistrationForm = () => {
       <Box p={3}>
         <Form
           onSubmit={onSubmit}
-          render={({ handleSubmit }) => (
-            <form onSubmit={handleSubmit}>
+          validate={() => {
+            return undefined
+          }}
+          render={({ handleSubmit, hasValidationErrors, errors }) => (
+            <form
+              onSubmit={(e) => {
+                e.preventDefault()
+                if (hasValidationErrors) {
+                  handleSubmitWithValidation(errors)
+                } else {
+                  handleSubmit(e)
+                }
+              }}
+            >
               <PatientDataSection />
               <DocumentSection />
 
@@ -59,6 +83,12 @@ const PatientRegistrationForm = () => {
           <ResultSection submittedData={submittedData} />
         )}
       </Box>
+
+      <ValidationErrorsModal
+        open={isErrorModalOpen}
+        onClose={() => setIsErrorModalOpen(false)}
+        errors={validationErrors}
+      />
     </StyledPatientRegistrationFormContainer>
   )
 }

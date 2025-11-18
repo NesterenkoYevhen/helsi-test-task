@@ -48,7 +48,7 @@ export const PatientDataSection = () => {
             label="По батькові"
             required
             fullWidth
-            validate={composeValidators(required, latinUkrDigitsSpecial, singleLanguageUaOrEn, firstUppercase)}
+            validate={composeValidators(latinUkrDigitsSpecial, singleLanguageUaOrEn, firstUppercase)}
             switchChecked={values.ignoreMiddleName}
             switchHelperText="Немає по батькові згідно документів"
             onSwitchChange={(checked) => {
@@ -66,7 +66,7 @@ export const PatientDataSection = () => {
             label="РНОКПП (ІПН)"
             required
             fullWidth
-            validate={composeValidators(required, rnokpp({
+            validate={composeValidators(rnokpp({
               birthDate: values.birthDate,
               gender: values.gender
             }))}

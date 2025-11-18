@@ -29,6 +29,14 @@ export const DocumentSection = () => {
     }
   }, [values.birthDate])
 
+  useEffect(() => {
+    if (values.documentExpiryDate) {
+      form.resetFieldState('documentExpiryDate')
+      form.change('documentExpiryDate', values.documentExpiryDate)
+      form.blur('documentExpiryDate')
+    }
+  }, [values.documentIssueDate])
+
   return (
     <Paper sx={{ p: 3, mb: 3 }}>
       <Typography variant="h6" sx={{ mb: 3, fontWeight: 600 }}>
